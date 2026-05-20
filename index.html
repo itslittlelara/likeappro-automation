@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LikeAPPro — Triggers Automáticos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0A0A0A;--dark:#111;--card:#1A1A1A;--border:#2A2A2A;
+  --gold:#C9A84C;--gold2:#E8C96D;--white:#F5F5F0;--muted:#888880;
+}
+body{font-family:'Inter',sans-serif;background:var(--black);color:var(--white);min-height:100vh;display:flex;flex-direction:column}
+.pres{width:100%;max-width:900px;margin:0 auto;flex:1;display:flex;flex-direction:column;min-height:100vh}
+.slide{display:none;flex:1;flex-direction:column;animation:fadeIn .4s ease}
+.slide.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.slide-inner{flex:1;padding:52px 56px}
+.eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;font-family:'Montserrat',sans-serif}
+.stitle{font-family:'Montserrat',sans-serif;font-size:30px;font-weight:700;color:var(--white);line-height:1.2;margin-bottom:6px}
+.stitle span{color:var(--gold)}
+.gold-line{width:36px;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold2));margin-bottom:24px;border-radius:1px}
+
+/* SLIDE 1 */
+.s1{background:var(--black);position:relative;overflow:hidden}
+.s1 .slide-inner{display:flex;flex-direction:column;justify-content:center;position:relative}
+.s1 .bg-text{position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-family:'Montserrat',sans-serif;font-size:140px;font-weight:900;color:rgba(255,255,255,.025);pointer-events:none;white-space:nowrap;letter-spacing:-4px}
+.s1 .deco{position:absolute;right:56px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,var(--gold),transparent)}
+.logo-badge{background:var(--gold);color:var(--black);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 14px;display:inline-block;margin-bottom:22px;font-family:'Montserrat',sans-serif}
+.s1 h1{font-family:'Montserrat',sans-serif;font-size:52px;font-weight:900;line-height:1.05;max-width:520px;margin-bottom:16px}
+.s1 h1 em{color:var(--gold);font-style:normal}
+.s1 .sub{font-size:15px;color:var(--muted);max-width:440px;line-height:1.65;margin-bottom:28px}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{border:1px solid var(--border);color:var(--muted);font-size:11px;padding:5px 14px;font-family:'Montserrat',sans-serif;letter-spacing:1px}
+
+/* ARCH */
+.arch-flow{display:flex;align-items:stretch;gap:0;margin-bottom:24px}
+.arch-node{flex:1;background:var(--card);border:1px solid var(--border);padding:18px 12px;text-align:center}
+.arch-node.hl{border-color:var(--gold);background:#1C1800}
+.arch-node .icon{font-size:22px;color:var(--gold);margin-bottom:8px}
+.arch-node .label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--white);font-family:'Montserrat',sans-serif;margin-bottom:4px}
+.arch-node .sub{font-size:11px;color:var(--muted)}
+.arch-arr{display:flex;align-items:center;padding:0 8px;color:var(--gold);font-size:18px}
+.benefit-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.benefit{background:var(--card);border:1px solid var(--border);border-left:2px solid var(--gold);padding:14px 16px}
+.benefit strong{display:block;font-size:12px;font-family:'Montserrat',sans-serif;color:var(--white);margin-bottom:3px}
+.benefit p{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* TRIGGERS */
+.triggers-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.trig{background:var(--card);border:1px solid var(--border);padding:16px}
+.trig .t-pill{font-size:9px;font-family:'Montserrat',sans-serif;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.trig .t-name{font-size:14px;font-weight:600;font-family:'Montserrat',sans-serif;color:var(--white);margin-bottom:4px}
+.trig .t-event{font-family:'Courier New',monospace;font-size:10px;color:var(--muted);background:#0D0D0D;padding:2px 7px;display:inline-block;margin-bottom:10px}
+.t-channels{display:flex;gap:5px;flex-wrap:wrap}
+.ch-w{background:#0D2B1A;color:#4CAF82;font-size:10px;padding:3px 9px;font-weight:700;font-family:'Montserrat',sans-serif}
+.ch-e{background:#1A1A2E;color:#7B9FE8;font-size:10px;padding:3px 9px;font-weight:700;font-family:'Montserrat',sans-serif}
+
+/* N8N */
+.opts-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.opt-box{background:var(--card);border:1px solid var(--border);padding:14px 16px}
+.opt-box.rec{border-color:var(--gold)}
+.opt-box .ob-title{font-size:12px;font-weight:700;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1px;color:var(--white);margin-bottom:5px;display:flex;align-items:center;gap:8px}
+.rec-tag{background:var(--gold);color:var(--black);font-size:9px;padding:1px 7px;font-weight:700}
+.opt-box .ob-desc{font-size:12px;color:var(--muted);line-height:1.5}
+.flow-list{display:flex;flex-direction:column;gap:10px}
+.fstep{display:flex;gap:14px;align-items:flex-start}
+.fstep-num{width:30px;height:30px;background:var(--gold);color:var(--black);font-family:'Montserrat',sans-serif;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fstep-body{flex:1;background:var(--card);border:1px solid var(--border);padding:11px 14px}
+.fstep-body .ft{font-size:13px;font-weight:600;font-family:'Montserrat',sans-serif;color:var(--white);margin-bottom:3px}
+.fstep-body .fd{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* APIS */
+.api-table{width:100%;border-collapse:collapse}
+.api-table th{background:#1C1800;color:var(--gold);font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:10px 12px;text-align:left;font-weight:700;border-bottom:1px solid var(--gold)}
+.api-table td{padding:10px 12px;font-size:12px;color:var(--muted);border-bottom:1px solid var(--border)}
+.api-table tr:hover td{background:var(--card)}
+.tool-name{color:var(--white);font-weight:600;font-family:'Montserrat',sans-serif;font-size:13px}
+.best-badge{background:var(--gold);color:var(--black);font-size:9px;padding:1px 6px;font-weight:700;vertical-align:middle;margin-left:4px;font-family:'Montserrat',sans-serif}
+.sec-label{font-size:10px;font-family:'Montserrat',sans-serif;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:18px 0 8px}
+
+/* MENSAGENS */
+.msg-cards{display:flex;flex-direction:column;gap:12px}
+.msg-card{background:var(--card);border:1px solid var(--border);border-left:2px solid var(--gold);padding:16px 18px}
+.msg-card .mc-trigger{font-family:'Courier New',monospace;font-size:11px;color:var(--gold);margin-bottom:5px}
+.msg-card .mc-ch{font-size:11px;color:var(--muted);margin-bottom:10px;display:flex;gap:6px}
+.msg-card .mc-text{font-size:14px;color:var(--white);line-height:1.65;font-style:italic}
+
+/* ROADMAP */
+.road-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.rm{background:var(--card);border:1px solid var(--border);padding:18px}
+.rm .rm-num{font-family:'Montserrat',sans-serif;font-size:36px;font-weight:900;color:var(--gold);opacity:.35;margin-bottom:6px}
+.rm .rm-title{font-size:14px;font-weight:700;font-family:'Montserrat',sans-serif;color:var(--white);margin-bottom:5px}
+.rm .rm-desc{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* NAV */
+.nav{display:flex;justify-content:space-between;align-items:center;padding:14px 56px;border-top:1px solid var(--border);background:var(--dark)}
+.nav-dots{display:flex;gap:5px;align-items:center}
+.nav-dot{width:6px;height:6px;background:var(--border);cursor:pointer;transition:.2s}
+.nav-dot.on{background:var(--gold);width:20px}
+.nav-btn{background:transparent;border:1px solid var(--border);color:var(--muted);padding:7px 18px;font-size:11px;cursor:pointer;font-family:'Montserrat',sans-serif;letter-spacing:1.5px;transition:.15s}
+.nav-btn:hover{border-color:var(--gold);color:var(--gold)}
+.nav-btn:disabled{opacity:.2;cursor:default}
+.slide-info{font-size:11px;color:var(--muted);font-family:'Montserrat',sans-serif;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="pres" id="pres">
+
+  <!-- S1 CAPA -->
+  <div class="slide s1 active" data-slide="0">
+    <div class="slide-inner">
+      <div class="bg-text">LIKEAPPRO</div>
+      <div class="deco"></div>
+      <div class="logo-badge">LikeAPPro</div>
+      <h1>Triggers<br><em>Automáticos</em><br>no App</h1>
+      <p class="sub">Comunicação personalizada via Email e WhatsApp em cada etapa do ciclo de vida do usuário — do cadastro ao churn.</p>
+      <div class="tags">
+        <span class="tag">WhatsApp API</span>
+        <span class="tag">Email</span>
+        <span class="tag">n8n</span>
+        <span class="tag">ManyChat</span>
+        <span class="tag">Banco de Dados</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- S2 ARQUITETURA -->
+  <div class="slide" data-slide="1">
+    <div class="slide-inner">
+      <div class="eyebrow">Visão geral</div>
+      <div class="stitle">Como funciona a <span>arquitetura</span></div>
+      <div class="gold-line"></div>
+      <div class="arch-flow">
+        <div class="arch-node">
+          <div class="icon">📱</div>
+          <div class="label">App</div>
+          <div class="sub">Captura o evento do usuário</div>
+        </div>
+        <div class="arch-arr">→</div>
+        <div class="arch-node">
+          <div class="icon">🗄️</div>
+          <div class="label">Banco de Dados</div>
+          <div class="sub">Registra e atualiza o status</div>
+        </div>
+        <div class="arch-arr">→</div>
+        <div class="arch-node hl">
+          <div class="icon">⚡</div>
+          <div class="label">n8n</div>
+          <div class="sub">Orquestra os fluxos</div>
+        </div>
+        <div class="arch-arr">→</div>
+        <div class="arch-node">
+          <div class="icon">✉️</div>
+          <div class="label">Email + WPP</div>
+          <div class="sub">Entrega ao usuário</div>
+        </div>
+      </div>
+      <div class="benefit-row">
+        <div class="benefit"><strong>Tempo real</strong><p>Resposta automática ao comportamento exato do usuário</p></div>
+        <div class="benefit"><strong>Zero manual</strong><p>Nenhuma intervenção humana após a configuração</p></div>
+        <div class="benefit"><strong>Escalável</strong><p>Novos triggers em menos de 30 minutos</p></div>
+        <div class="benefit"><strong>Rastreável</strong><p>Histórico completo de todas as comunicações</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3 TRIGGERS -->
+  <div class="slide" data-slide="2">
+    <div class="slide-inner">
+      <div class="eyebrow">Mapeamento</div>
+      <div class="stitle">Status e <span>Triggers</span></div>
+      <div class="gold-line"></div>
+      <div class="triggers-grid">
+        <div class="trig"><div class="t-pill">Cadastro</div><div class="t-name">Novo usuário</div><div class="t-event">user.created</div><div class="t-channels"><span class="ch-w">WhatsApp</span><span class="ch-e">Email</span></div></div>
+        <div class="trig"><div class="t-pill">Ativação</div><div class="t-name">Primeiro uso</div><div class="t-event">user.active</div><div class="t-channels"><span class="ch-e">Email</span></div></div>
+        <div class="trig"><div class="t-pill">Inatividade</div><div class="t-name">Sem uso 3–7 dias</div><div class="t-event">user.inactive</div><div class="t-channels"><span class="ch-w">WhatsApp</span><span class="ch-e">Email</span></div></div>
+        <div class="trig"><div class="t-pill">Cancelamento</div><div class="t-name">Cancelou o plano</div><div class="t-event">user.unsubscribed</div><div class="t-channels"><span class="ch-e">Email</span></div></div>
+        <div class="trig"><div class="t-pill">Desinstalação</div><div class="t-name">App removido</div><div class="t-event">user.churned</div><div class="t-channels"><span class="ch-e">Email</span></div></div>
+        <div class="trig"><div class="t-pill">Retorno</div><div class="t-name">Voltou ao app</div><div class="t-event">user.reactivated</div><div class="t-channels"><span class="ch-w">WhatsApp</span><span class="ch-e">Email</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S4 N8N -->
+  <div class="slide" data-slide="3">
+    <div class="slide-inner">
+      <div class="eyebrow">Configuração</div>
+      <div class="stitle">Como montar <span>no n8n</span></div>
+      <div class="gold-line"></div>
+      <div class="opts-row">
+        <div class="opt-box rec">
+          <div class="ob-title">Webhook <span class="rec-tag">Recomendado</span></div>
+          <div class="ob-desc">App envia POST para o n8n a cada mudança de status. Reação em tempo real.</div>
+        </div>
+        <div class="opt-box">
+          <div class="ob-title">Polling</div>
+          <div class="ob-desc">n8n consulta o banco de dados a cada X minutos. Útil sem acesso ao dev do app.</div>
+        </div>
+      </div>
+      <div class="flow-list">
+        <div class="fstep"><div class="fstep-num">1</div><div class="fstep-body"><div class="ft">Criar o nó Webhook no n8n</div><div class="fd">Novo workflow → nó Webhook → copiar URL gerada e passar para o dev do app</div></div></div>
+        <div class="fstep"><div class="fstep-num">2</div><div class="fstep-body"><div class="ft">Configurar o nó Switch por evento</div><div class="fd">Filtrar pelo campo "event" e rotear para o canal certo: email ou WhatsApp</div></div></div>
+        <div class="fstep"><div class="fstep-num">3</div><div class="fstep-body"><div class="ft">Conectar os nós de envio e testar</div><div class="fd">Cada branch aponta para Email ou HTTP Request da API escolhida — testar com um cadastro real</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S5 APIS -->
+  <div class="slide" data-slide="4">
+    <div class="slide-inner">
+      <div class="eyebrow">Ferramentas</div>
+      <div class="stitle">APIs de <span>disparo</span></div>
+      <div class="gold-line"></div>
+      <div class="sec-label">WhatsApp</div>
+      <table class="api-table">
+        <thead><tr><th>Ferramenta</th><th>Perfil</th><th>Custo</th><th>Indicado para</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tool-name">ManyChat<span class="best-badge">TOP</span></span></td><td>No-code visual, funis prontos</td><td>Pago por contato</td><td>Alto volume, fácil de gerenciar</td></tr>
+          <tr><td><span class="tool-name">Z-API</span></td><td>Simples, popular no Brasil</td><td>Plano fixo</td><td>Iniciar rápido, equipe pequena</td></tr>
+          <tr><td><span class="tool-name">Evolution API</span></td><td>Open source, self-hosted</td><td>Gratuita</td><td>Time técnico disponível</td></tr>
+          <tr><td><span class="tool-name">Twilio</span></td><td>Robusto, nó nativo no n8n</td><td>Por mensagem</td><td>Alta confiabilidade, escala global</td></tr>
+        </tbody>
+      </table>
+      <div class="sec-label">Email</div>
+      <table class="api-table">
+        <thead><tr><th>Ferramenta</th><th>Perfil</th><th>Custo</th><th>Indicado para</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tool-name">Resend<span class="best-badge">TOP</span></span></td><td>Moderno, fácil, boa entregabilidade</td><td>Freemium</td><td>Primeiro setup com qualidade</td></tr>
+          <tr><td><span class="tool-name">SendGrid</span></td><td>Escala, analytics avançado</td><td>Freemium</td><td>Volume alto, relatórios detalhados</td></tr>
+          <tr><td><span class="tool-name">Gmail</span></td><td>Nó nativo no n8n</td><td>Gratuito</td><td>Testes e volume baixo</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- S6 MENSAGENS -->
+  <div class="slide" data-slide="5">
+    <div class="slide-inner">
+      <div class="eyebrow">Comunicação</div>
+      <div class="stitle">Modelos de <span>mensagens</span></div>
+      <div class="gold-line"></div>
+      <div class="msg-cards">
+        <div class="msg-card">
+          <div class="mc-trigger">user.created</div>
+          <div class="mc-ch"><span class="ch-w">WhatsApp — imediato</span></div>
+          <div class="mc-text">"Oi, [nome]! Seu cadastro no LikeAPPro foi confirmado. Aqui você vai editar suas fotos como os maiores criadores do Brasil. Qualquer dúvida, é só chamar!"</div>
+        </div>
+        <div class="msg-card">
+          <div class="mc-trigger">user.inactive · 3 dias</div>
+          <div class="mc-ch"><span class="ch-e">Email</span></div>
+          <div class="mc-text">"[nome], novos presets chegaram no LikeAPPro esta semana. Seus criativos estão esperando por você — vem editar!"</div>
+        </div>
+        <div class="msg-card">
+          <div class="mc-trigger">user.unsubscribed / user.churned · 1h depois</div>
+          <div class="mc-ch"><span class="ch-e">Email</span></div>
+          <div class="mc-text">"Você está saindo, [nome]? Conta pra gente o que aconteceu — a gente quer melhorar o LikeAPPro pra você voltar ainda melhor."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S7 PRÓXIMOS PASSOS -->
+  <div class="slide" data-slide="6">
+    <div class="slide-inner">
+      <div class="eyebrow">Roadmap</div>
+      <div class="stitle">Próximos <span>passos</span></div>
+      <div class="gold-line"></div>
+      <div class="road-grid">
+        <div class="rm"><div class="rm-num">01</div><div class="rm-title">Mapear status no banco</div><div class="rm-desc">Confirmar com o dev quais eventos já existem e quais precisam ser criados ou adaptados</div></div>
+        <div class="rm"><div class="rm-num">02</div><div class="rm-title">Escolher a API de WhatsApp</div><div class="rm-desc">ManyChat para facilidade, Z-API para agilidade, Evolution se tiver dev disponível</div></div>
+        <div class="rm"><div class="rm-num">03</div><div class="rm-title">Montar o primeiro fluxo</div><div class="rm-desc">user.created → WhatsApp. Só um fluxo, para validar que a mensagem chega corretamente</div></div>
+        <div class="rm"><div class="rm-num">04</div><div class="rm-title">Expandir os triggers</div><div class="rm-desc">Um por vez: inatividade → cancelamento → reativação → churn</div></div>
+        <div class="rm" style="grid-column:1/-1"><div class="rm-num">05</div><div class="rm-title">Monitorar e otimizar</div><div class="rm-desc">Após 2 semanas de dados, analisar taxas de abertura e resposta para refinar as mensagens e os timings</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="nav-btn" id="prev" onclick="go(-1)" disabled>← PREV</button>
+    <div style="display:flex;align-items:center;gap:16px">
+      <div class="nav-dots" id="dots"></div>
+      <span class="slide-info" id="counter">01 / 07</span>
+    </div>
+    <button class="nav-btn" id="next" onclick="go(1)">NEXT →</button>
+  </div>
+</div>
+
+<script>
+const slides=document.querySelectorAll('.slide');
+const dotsEl=document.getElementById('dots');
+const counter=document.getElementById('counter');
+let cur=0;
+slides.forEach((_,i)=>{
+  const d=document.createElement('div');
+  d.className='nav-dot'+(i===0?' on':'');
+  d.onclick=()=>goTo(i);
+  dotsEl.appendChild(d);
+});
+function goTo(n){
+  slides[cur].classList.remove('active');
+  dotsEl.children[cur].classList.remove('on');
+  cur=n;
+  slides[cur].classList.add('active');
+  dotsEl.children[cur].classList.add('on');
+  counter.textContent=String(cur+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+  document.getElementById('prev').disabled=cur===0;
+  document.getElementById('next').disabled=cur===slides.length-1;
+}
+function go(d){goTo(Math.max(0,Math.min(slides.length-1,cur+d)));}
+</script>
+</body>
+</html>
