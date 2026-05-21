@@ -177,8 +177,8 @@ body{font-family:'Inter',sans-serif;background:var(--black);color:var(--white);m
         <div class="trig"><div class="t-pill">Cadastro</div><div class="t-name">Novo usuário</div><div class="t-event">user.created</div><div class="t-channels"><span class="ch-w">WhatsApp</span><span class="ch-e">Email</span></div></div>
         <div class="trig"><div class="t-pill">Ativação</div><div class="t-name">Primeiro uso</div><div class="t-event">user.active</div><div class="t-channels"><span class="ch-e">Email</span></div></div>
         <div class="trig"><div class="t-pill">Inatividade</div><div class="t-name">Sem uso 3–7 dias</div><div class="t-event">user.inactive</div><div class="t-channels"><span class="ch-w">WhatsApp</span><span class="ch-e">Email</span></div></div>
-        <div class="trig"><div class="t-pill">Cancelamento</div><div class="t-name">Cancelou o plano</div><div class="t-event">user.unsubscribed</div><div class="t-channels"><span class="ch-e">Email</span></div></div>
-        <div class="trig"><div class="t-pill">Desinstalação</div><div class="t-name">App removido</div><div class="t-event">user.churned</div><div class="t-channels"><span class="ch-e">Email</span></div></div>
+        <div class="trig"><div class="t-pill">Cancelamento</div><div class="t-name">Cancelou o plano</div><div class="t-event">user.unsubscribed</div><div class="t-channels"><span class="ch-w">WhatsApp</span><span class="ch-e">Email</span></div></div>
+        <div class="trig"><div class="t-pill">Desinstalação</div><div class="t-name">App removido</div><div class="t-event">user.churned</div><div class="t-channels"><span class="ch-w">WhatsApp</span><span class="ch-e">Email</span></div></div>
         <div class="trig"><div class="t-pill">Retorno</div><div class="t-name">Voltou ao app</div><div class="t-event">user.reactivated</div><div class="t-channels"><span class="ch-w">WhatsApp</span><span class="ch-e">Email</span></div></div>
       </div>
     </div>
@@ -254,9 +254,14 @@ body{font-family:'Inter',sans-serif;background:var(--black);color:var(--white);m
           <div class="mc-text">"[nome], novos presets chegaram no LikeAPPro esta semana. Seus criativos estão esperando por você — vem editar!"</div>
         </div>
         <div class="msg-card">
-          <div class="mc-trigger">user.unsubscribed / user.churned · 1h depois</div>
-          <div class="mc-ch"><span class="ch-e">Email</span></div>
+          <div class="mc-trigger">user.unsubscribed · 1h depois</div>
+          <div class="mc-ch"><span class="ch-e">Email</span><span class="ch-w">WhatsApp</span></div>
           <div class="mc-text">"Você está saindo, [nome]? Conta pra gente o que aconteceu — a gente quer melhorar o LikeAPPro pra você voltar ainda melhor."</div>
+        </div>
+        <div class="msg-card">
+          <div class="mc-trigger">user.churned · 24h depois</div>
+          <div class="mc-ch"><span class="ch-e">Email</span><span class="ch-w">WhatsApp</span></div>
+          <div class="mc-text">"Sentimos sua falta, [nome]. Seus presets favoritos ainda estão aqui esperando. Que tal dar uma segunda chance ao LikeAPPro?"</div>
         </div>
       </div>
     </div>
